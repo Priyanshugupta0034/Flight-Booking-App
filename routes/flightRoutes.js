@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { protect, adminOnly } from "../middleware/authMiddleware.js";
+import { searchFlights, getFlight, createFlight, updateFlight, deleteFlight } from "../controllers/flightController.js";
+const router = Router();
+router.get("/", searchFlights);
+router.get("/:id", getFlight);
+router.post("/", protect, adminOnly, createFlight);
+router.patch("/:id", protect, adminOnly, updateFlight);
+router.delete("/:id", protect, adminOnly, deleteFlight);
+export default router;

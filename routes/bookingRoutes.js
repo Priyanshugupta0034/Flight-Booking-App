@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { protect, adminOnly } from "../middleware/authMiddleware.js";
+import { createBooking, getBooking, requestCancellation, reviewCancellation, listBookings } from "../controllers/bookingController.js";
+const router = Router();
+router.post("/", protect, createBooking);
+router.get("/", protect, adminOnly, listBookings);
+router.get("/:id", protect, getBooking);
+router.post("/:id/cancellation", protect, requestCancellation);
+router.patch("/:id/cancellation", protect, adminOnly, reviewCancellation);
+export default router;
